@@ -23,7 +23,7 @@ Two things differ from the paper:
 
 > John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, Oleg Klimov. **Proximal Policy Optimization Algorithms.** arXiv:1707.06347, 2017. <https://arxiv.org/abs/1707.06347>
 
-This reproduction uses the arXiv v2 (2017-08-28). The paper is a preprint and was not published with code.
+This reproduction uses the arXiv v2 (2017-08-28). The paper is a preprint with no peer-reviewed version. It contains no code, but OpenAI released an implementation the same day in `openai/baselines` (`baselines/pposgd`, commit `da99706`, 2017-07-20). The paper does not say which code version produced Table 1, and this reproduction does not use that release.
 
 ### What is reproduced
 
@@ -49,7 +49,7 @@ This reproduction uses the arXiv v2 (2017-08-28). The paper is a preprint and wa
 
 ### Implementation details not in the paper
 
-The paper leaves out many code-level details, and they strongly affect results ([Engstrom et al., 2020](#related-reproductions-and-implementation-references); [Huang et al., 2022](#related-reproductions-and-implementation-references)). This implementation follows [CleanRL's `ppo_continuous_action.py`](https://github.com/vwxyzjn/cleanrl/blob/master/cleanrl/ppo_continuous_action.py). That file has been benchmarked against `openai/baselines` `ppo2`.
+The paper leaves out many code-level details, and they strongly affect results ([Engstrom et al., 2020](#implementation-references-and-related-studies); [Huang et al., 2022](#implementation-references-and-related-studies)). This implementation follows [CleanRL's `ppo_continuous_action.py`](https://github.com/vwxyzjn/cleanrl/blob/master/cleanrl/ppo_continuous_action.py). That file implements the continuous-action details listed by Huang et al. (2022, ICLR Blog Track), and those authors report that their reimplementation closely matches the original `openai/baselines` results on MuJoCo tasks.
 
 - Observation normalization (running mean/std) and clipping to [−10, 10]
 - Reward scaling by a running estimate of the discounted-return std, then clipping to [−10, 10]
@@ -107,7 +107,7 @@ The CI is a stratified bootstrap with 10,000 resamples: seeds are resampled with
 | Swimmer-v5 | 0.5 | 3.1 ± 13.4 | 98.1 ± 4.4 | 88.1 ± 13.8 | 64.9 ± 29.5 |
 | Walker2d-v5 | 1.8 | 400.1 ± 68.1 | 3085.0 ± 604.9 | 2534.2 ± 1906.5 | 2937.0 ± 470.9 |
 
-For reference, CleanRL reports these `-v4` returns at 1M steps with ε = 0.2 and value clipping on: Hopper 2382.86 ± 271.74, Walker2d 2287.95 ± 571.78, HalfCheetah 1442.64 ± 46.03, InvertedPendulum 963.09 ± 22.20.
+For reference, CleanRL reports these `-v4` returns (3 seeds, 1M steps, default settings: ε = 0.2, value clipping on): Hopper 2382.86 ± 271.74, Walker2d 2287.95 ± 571.78, HalfCheetah 1442.64 ± 46.03, InvertedPendulum 963.09 ± 22.20.
 
 ### Learning curves
 
@@ -133,7 +133,7 @@ The plot shows the approximate KL(π_old ‖ π_new) per update, using the estim
 
 - **Gym `-v1` with MuJoCo 1.x vs. Gymnasium `-v5` with MuJoCo 3.13.** Model files, reward terms, and termination conditions changed between versions, so raw returns are not comparable to the paper.
 - **Different normalization anchors.** The paper's "best result" anchor is not specified, and its raw runs are unavailable. Normalized scores are therefore comparable to the paper only in ranking and relative gaps, not in absolute value.
-- **Unknown original code.** The code-level details the paper used are unknown. This reproduction adopts the baselines/CleanRL conventions listed above.
+- **Original code version not identified.** OpenAI's `baselines/pposgd` was released with the paper, but the paper does not state which code produced Table 1. This reproduction adopts the CleanRL conventions listed above.
 
 ---
 
@@ -250,28 +250,32 @@ The score of a setting is the mean of `norm_i` over its 21 runs. The best anchor
 
 ## References
 
+Peer-reviewed versions are cited where they exist. Metadata was checked on 2026-09-13 against the publishers' pages (PMLR, NeurIPS proceedings, JMLR, ICLR, Crossref).
+
 ### Paper reproduced
 
-- Schulman, J., Wolski, F., Dhariwal, P., Radford, A., & Klimov, O. (2017). *Proximal Policy Optimization Algorithms.* arXiv:1707.06347. <https://arxiv.org/abs/1707.06347>
+- Schulman, J., Wolski, F., Dhariwal, P., Radford, A., & Klimov, O. (2017). *Proximal Policy Optimization Algorithms.* arXiv preprint arXiv:1707.06347. <https://arxiv.org/abs/1707.06347>
+  - The paper has no peer-reviewed version. OpenAI released an implementation on the same day in `openai/baselines` (`baselines/pposgd`, commit [`da99706`](https://github.com/openai/baselines/commit/da99706046), 2017-07-20).
 
 ### Methods the paper builds on
 
-- Schulman, J., Levine, S., Moritz, P., Jordan, M. I., & Abbeel, P. (2015). *Trust Region Policy Optimization.* ICML 2015. arXiv:1502.05477. <https://arxiv.org/abs/1502.05477>
-- Schulman, J., Moritz, P., Levine, S., Jordan, M. I., & Abbeel, P. (2015). *High-Dimensional Continuous Control Using Generalized Advantage Estimation.* arXiv:1506.02438. <https://arxiv.org/abs/1506.02438>
+- Schulman, J., Levine, S., Abbeel, P., Jordan, M., & Moritz, P. (2015). Trust region policy optimization. In *Proceedings of the 32nd International Conference on Machine Learning* (PMLR Vol. 37, pp. 1889–1897). <https://proceedings.mlr.press/v37/schulman15.html>
+- Schulman, J., Moritz, P., Levine, S., Jordan, M. I., & Abbeel, P. (2016). High-dimensional continuous control using generalized advantage estimation. In *International Conference on Learning Representations (ICLR 2016)*. ICLR 2016 published no proceedings; the conference version is hosted at <https://arxiv.org/abs/1506.02438>.
 
-### Related reproductions and implementation references
+### Implementation references and related studies
 
-- Huang, S., Dossa, R. F. J., Ye, C., Braga, J., Chakraborty, D., Mehta, K., & Araújo, J. G. M. (2022). *CleanRL: High-quality Single-file Implementations of Deep Reinforcement Learning Algorithms.* JMLR 23(274). <https://jmlr.org/papers/v23/21-1342.html>. Code: <https://github.com/vwxyzjn/cleanrl>. Its `ppo_continuous_action.py` is the reference implementation here, with benchmarks at <https://docs.cleanrl.dev/rl-algorithms/ppo/>.
-- Huang, S., Dossa, R. F. J., Raffin, A., Kanervisto, A., & Wang, W. (2022). *The 37 Implementation Details of Proximal Policy Optimization.* ICLR Blog Track. <https://iclr-blog-track.github.io/2022/03/25/ppo-implementation-details/>
-- Engstrom, L., Ilyas, A., Santurkar, S., Tsipras, D., Janoos, F., Rudolph, L., & Madry, A. (2020). *Implementation Matters in Deep Policy Gradients: A Case Study on PPO and TRPO.* ICLR 2020. arXiv:2005.12729. <https://arxiv.org/abs/2005.12729>. Code: <https://github.com/MadryLab/implementation-matters>
-- Andrychowicz, M., et al. (2021). *What Matters for On-Policy Deep Actor-Critic Methods? A Large-Scale Study.* ICLR 2021. <https://openreview.net/forum?id=nIAxjsniDzg>. Also circulated as arXiv:2006.05990.
-- Hsu, C. C.-Y., Mendler-Dünner, C., & Hardt, M. (2020). *Revisiting Design Choices in Proximal Policy Optimization.* arXiv:2009.10897. <https://arxiv.org/abs/2009.10897>
-- adrische. *Reinforcement Learning: Zero to PPO.* A step-by-step PPO reimplementation on the same seven `-v5` tasks. <https://github.com/adrische/Reimplementing-PPO>
+- Huang, S., Dossa, R. F. J., Ye, C., Braga, J., Chakraborty, D., Mehta, K., & Araújo, J. G. M. (2022). CleanRL: High-quality single-file implementations of deep reinforcement learning algorithms. *Journal of Machine Learning Research*, 23(274), 1–18. <https://jmlr.org/papers/v23/21-1342.html>
+  - Code: <https://github.com/vwxyzjn/cleanrl>. Its `ppo_continuous_action.py` is the reference implementation here, with benchmarks at <https://docs.cleanrl.dev/rl-algorithms/ppo/>.
+- Huang, S., Dossa, R. F. J., Raffin, A., Kanervisto, A., & Wang, W. (2022). The 37 implementation details of proximal policy optimization. *ICLR Blog Track*. <https://iclr-blog-track.github.io/2022/03/25/ppo-implementation-details/>
+- Engstrom, L., Ilyas, A., Santurkar, S., Tsipras, D., Janoos, F., Rudolph, L., & Madry, A. (2020). Implementation matters in deep RL: A case study on PPO and TRPO. In *International Conference on Learning Representations (ICLR 2020)*. <https://openreview.net/forum?id=r1etN1rtPB>
+  - Code: <https://github.com/MadryLab/implementation-matters>
+- Andrychowicz, M., Raichuk, A., Stańczyk, P., Orsini, M., Girgin, S., Marinier, R., Hussenot, L., Geist, M., Pietquin, O., Michalski, M., Gelly, S., & Bachem, O. (2021). What matters for on-policy deep actor-critic methods? A large-scale study. In *International Conference on Learning Representations (ICLR 2021)*. <https://openreview.net/forum?id=nIAxjsniDzg>
+- adrische. *Reinforcement Learning: Zero to PPO* (GitHub repository). A step-by-step PPO reimplementation on the same seven `-v5` tasks; not a publication. <https://github.com/adrische/Reimplementing-PPO>
 
 ### Software
 
-- Towers, M., et al. (2024). *Gymnasium: A Standard Interface for Reinforcement Learning Environments.* arXiv:2407.17032. <https://arxiv.org/abs/2407.17032>
-- Todorov, E., Erez, T., & Tassa, Y. (2012). *MuJoCo: A physics engine for model-based control.* IROS 2012.
+- Towers, M., Kwiatkowski, A., Balis, J. U., De Cola, G., Deleu, T., Goulão, M., Kallinteris, A., Krimmel, M., KG, A., Perez-Vicente, R., Terry, J., Pierré, A., Schulhoff, S., Tai, J. J., Tan, H., & Younis, O. G. (2025). Gymnasium: A standard interface for reinforcement learning environments. In *Advances in Neural Information Processing Systems 38, Datasets and Benchmarks Track*. <https://doi.org/10.52202/085713-4916>
+- Todorov, E., Erez, T., & Tassa, Y. (2012). MuJoCo: A physics engine for model-based control. In *2012 IEEE/RSJ International Conference on Intelligent Robots and Systems* (pp. 5026–5033). <https://doi.org/10.1109/IROS.2012.6386109>
 - PyTorch: <https://pytorch.org>
 
 ---
