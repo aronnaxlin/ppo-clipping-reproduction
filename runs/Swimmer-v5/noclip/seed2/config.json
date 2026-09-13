@@ -1,0 +1,18 @@
+{
+  "env_id": "Swimmer-v5",
+  "seed": 2,
+  "clip": "none",
+  "total_timesteps": 1000000,
+  "out_dir": "runs",
+  "num_steps": 2048,
+  "learning_rate": 0.0003,
+  "update_epochs": 10,
+  "minibatch_size": 64,
+  "gamma": 0.99,
+  "gae_lambda": 0.95,
+  "anneal_lr": 1,
+  "norm_adv": 1,
+  "max_grad_norm": 0.5,
+  "vf_coef": 0.5,
+  "ent_coef": 0.0
+}

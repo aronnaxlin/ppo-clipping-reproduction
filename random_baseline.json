@@ -1,0 +1,9 @@
+{
+  "HalfCheetah-v5": -287.20274250295074,
+  "Hopper-v5": 18.430333764358977,
+  "InvertedDoublePendulum-v5": 48.58449677740931,
+  "InvertedPendulum-v5": 5.35,
+  "Reacher-v5": -42.895979480024316,
+  "Swimmer-v5": 0.5316657800719158,
+  "Walker2d-v5": 1.7628200223764665
+}

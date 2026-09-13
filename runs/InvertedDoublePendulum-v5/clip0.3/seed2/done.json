@@ -1,0 +1,8 @@
+{
+  "env_id": "InvertedDoublePendulum-v5",
+  "variant": "clip0.3",
+  "seed": 2,
+  "episodes": 4260,
+  "last100_mean_return": 5775.865803473254,
+  "wall_time_s": 993.5
+}

@@ -1,0 +1,8 @@
+{
+  "env_id": "Reacher-v5",
+  "variant": "clip0.2",
+  "seed": 2,
+  "episodes": 19988,
+  "last100_mean_return": -7.823142362266964,
+  "wall_time_s": 1178.5
+}

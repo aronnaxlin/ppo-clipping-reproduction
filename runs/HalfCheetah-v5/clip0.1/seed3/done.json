@@ -1,0 +1,8 @@
+{
+  "env_id": "HalfCheetah-v5",
+  "variant": "clip0.1",
+  "seed": 3,
+  "episodes": 999,
+  "last100_mean_return": 1472.0913457881973,
+  "wall_time_s": 1139.6
+}

@@ -1,0 +1,1 @@
+{"env_id": "Hopper-v5", "variant": "clip0.3", "seed": 3, "episodes": 2585, "last100_mean_return": 1400.5850707295601, "wall_time_s": 1114.9}

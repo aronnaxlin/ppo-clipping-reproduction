@@ -1,0 +1,1 @@
+{"env_id": "Swimmer-v5", "variant": "clip0.1", "seed": 3, "episodes": 999, "last100_mean_return": 99.65291413957246, "wall_time_s": 1069.0}

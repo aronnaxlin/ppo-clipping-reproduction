@@ -1,0 +1,8 @@
+{
+  "env_id": "Walker2d-v5",
+  "variant": "clip0.1",
+  "seed": 1,
+  "episodes": 3628,
+  "last100_mean_return": 3646.132388847135,
+  "wall_time_s": 940.4
+}

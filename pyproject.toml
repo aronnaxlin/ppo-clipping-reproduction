@@ -1,0 +1,24 @@
+[project]
+name = "drl-final"
+version = "0.1.0"
+description = "Reproducing the clipping ablation (Table 1) of Schulman et al. 2017, Proximal Policy Optimization Algorithms"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "torch",
+    "gymnasium[mujoco]",
+    "numpy",
+    "pandas",
+    "matplotlib",
+    "tensorboard",
+]
+
+[tool.uv]
+package = false
+
+[tool.uv.sources]
+torch = { index = "pytorch-cpu" }
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
