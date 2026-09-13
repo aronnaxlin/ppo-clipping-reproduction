@@ -60,7 +60,7 @@ The paper leaves out many code-level details, and they strongly affect results (
 - Adam ε = 10⁻⁵
 - Truncation (time limit) treated as termination when bootstrapping, as in baselines and CleanRL
 
-Deliberate deviations from CleanRL:
+Deviations from CleanRL:
 
 1. **Value-loss clipping is off.** In CleanRL the value clip reuses the policy's ε. Turning it off means ε changes only the policy objective, which is the quantity the paper ablates.
 2. **One plain environment instead of `SyncVectorEnv`.** Gymnasium 1.x changed the vector-env autoreset semantics. With a single environment, a plain env is simpler and handles episode boundaries exactly.
@@ -250,17 +250,14 @@ The score of a setting is the mean of `norm_i` over its 21 runs. The best anchor
 
 ## References
 
-Peer-reviewed versions are cited where they exist. Metadata was checked on 2026-09-13 against the publishers' pages (PMLR, NeurIPS proceedings, JMLR, ICLR, Crossref).
-
 ### Paper reproduced
 
 - Schulman, J., Wolski, F., Dhariwal, P., Radford, A., & Klimov, O. (2017). *Proximal Policy Optimization Algorithms.* arXiv preprint arXiv:1707.06347. <https://arxiv.org/abs/1707.06347>
-  - The paper has no peer-reviewed version. OpenAI released an implementation on the same day in `openai/baselines` (`baselines/pposgd`, commit [`da99706`](https://github.com/openai/baselines/commit/da99706046), 2017-07-20).
 
 ### Methods the paper builds on
 
 - Schulman, J., Levine, S., Abbeel, P., Jordan, M., & Moritz, P. (2015). Trust region policy optimization. In *Proceedings of the 32nd International Conference on Machine Learning* (PMLR Vol. 37, pp. 1889–1897). <https://proceedings.mlr.press/v37/schulman15.html>
-- Schulman, J., Moritz, P., Levine, S., Jordan, M. I., & Abbeel, P. (2016). High-dimensional continuous control using generalized advantage estimation. In *International Conference on Learning Representations (ICLR 2016)*. ICLR 2016 published no proceedings; the conference version is hosted at <https://arxiv.org/abs/1506.02438>.
+- Schulman, J., Moritz, P., Levine, S., Jordan, M. I., & Abbeel, P. (2016). High-dimensional continuous control using generalized advantage estimation. In *International Conference on Learning Representations (ICLR 2016)*.
 
 ### Implementation references and related studies
 
@@ -270,7 +267,7 @@ Peer-reviewed versions are cited where they exist. Metadata was checked on 2026-
 - Engstrom, L., Ilyas, A., Santurkar, S., Tsipras, D., Janoos, F., Rudolph, L., & Madry, A. (2020). Implementation matters in deep RL: A case study on PPO and TRPO. In *International Conference on Learning Representations (ICLR 2020)*. <https://openreview.net/forum?id=r1etN1rtPB>
   - Code: <https://github.com/MadryLab/implementation-matters>
 - Andrychowicz, M., Raichuk, A., Stańczyk, P., Orsini, M., Girgin, S., Marinier, R., Hussenot, L., Geist, M., Pietquin, O., Michalski, M., Gelly, S., & Bachem, O. (2021). What matters for on-policy deep actor-critic methods? A large-scale study. In *International Conference on Learning Representations (ICLR 2021)*. <https://openreview.net/forum?id=nIAxjsniDzg>
-- adrische. *Reinforcement Learning: Zero to PPO* (GitHub repository). A step-by-step PPO reimplementation on the same seven `-v5` tasks; not a publication. <https://github.com/adrische/Reimplementing-PPO>
+- adrische. *Reinforcement Learning: Zero to PPO* (GitHub repository). A step-by-step PPO reimplementation on the same seven `-v5` tasks. <https://github.com/adrische/Reimplementing-PPO>
 
 ### Software
 
